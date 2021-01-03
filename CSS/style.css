@@ -1,0 +1,33 @@
+body{
+    background-color: cornsilk;
+}
+article{
+    text-align: center;
+}
+article h3{
+    font-family: myFirstFont;
+    color: cornflowerblue;
+
+}
+
+img{
+    
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+}
+
+#mySimpleParg{
+    font-family: Arial, sans-serif;
+    padding: 5px;
+    text-align: center;
+    color: rgb(220, 20, 60);
+}
+
+
+#myFonts{
+    margin-top: 25px;
+    background-color: #fff875;
+    font-family: 'Times New Roman', serif;
+}

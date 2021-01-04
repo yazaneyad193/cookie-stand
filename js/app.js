@@ -44,18 +44,18 @@ var shopOne = new Shop(23, 65, 6.3, "Seattle");
 var shopTwo = new Shop(3, 24, 1.2, "Tokyo");
 
 var shopThree = new Shop(11, 38, 3.7, "Dubai");
-var shopFour = new Shop(20, 38,2.3, "Paris");
-var shopFive = new Shop(2,16, 4.6, "Lima");
+var shopFour = new Shop(20, 38, 2.3, "Paris");
+var shopFive = new Shop(2, 16, 4.6, "Lima");
 
 //console.log("Hello "+shopOne);
 
 
 Shop.prototype.renderHeaderTable = function () {
-    
+
     var tHeader = document.createElement("thead");
 
     var emptycell = document.createElement("th");
-    emptycell.textContent ='';
+    emptycell.textContent = '';
     tHeader.appendChild(emptycell);
 
     //3. creat ul 
@@ -87,17 +87,44 @@ Shop.prototype.renderBodyTable = function () {
         var tdelemnt = document.createElement('td');
         tdelemnt.textContent = Math.floor(this.avgcookiesPerHour[index]);
         tbody.appendChild(tdelemnt);
-        
-       // this.total = this.total + Math.floor(this.avgcookiesPerHour[index]);
-        
-       
+
+        // this.total = this.total + Math.floor(this.avgcookiesPerHour[index]);
+
+
     } var totalcell = document.createElement("td");
-    totalcell.textContent = Math.floor( this.total);
+    totalcell.textContent = Math.floor(this.total);
     tbody.appendChild(totalcell);
     table.appendChild(tbody);
 
 
 }
+
+function totalsRow() {
+    var tableRow = document.createElement("tr");
+    table.appendChild(tableRow);
+
+    var header = document.createElement("th");
+    header.textContent = "Totals";
+    tableRow.appendChild(header);
+
+    var sum = 0;
+    var totalForAllLocations = 0;
+
+    for (let i = 0; i < hours.length; i++) {
+        var td = document.createElement("td");
+        sum = shopOne.total+ shopTwo.total + shopThree.total+ shopFour.total+ shopFive.total;
+        td.textContent = sum;
+        tableRow.appendChild(td);
+        totalForAllLocations = Math.floor( totalForAllLocations + sum);
+
+        console.log(sum);
+    }
+    var td = document.createElement("td");
+    td.textContent = totalForAllLocations;
+    tableRow.appendChild(td);
+}
+
+
 
 shopOne.getRandomCustomerPerHour();
 shopOne.getAvgcookiesPerHour();
@@ -124,3 +151,4 @@ shopFour.renderBodyTable();
 shopFive.getRandomCustomerPerHour();
 shopFive.getAvgcookiesPerHour();
 shopFive.renderBodyTable();
+totalsRow();

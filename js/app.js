@@ -62,6 +62,7 @@ Shop.prototype.renderHeaderTable = function () {
     /** */
     for (var index = 0; index < hours.length; index++) {
         var tdelemnt = document.createElement('td');
+        tdelemnt.setAttribute('class','headOfHours');
         tdelemnt.textContent = hours[index];
         tHeader.appendChild(tdelemnt);
     }

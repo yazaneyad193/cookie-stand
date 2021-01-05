@@ -13,3 +13,22 @@ table, td, th {
     padding: 15px;
     
 }
+
+
+
+header a {
+    text-decoration: none;
+    color: darkgray;
+
+}
+
+header a:hover{
+
+  color: green;
+}
+
+
+.headOfHours{
+    border:none; 
+    border-collapse:none;
+}

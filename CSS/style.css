@@ -31,3 +31,15 @@ img{
     background-color: #fff875;
     font-family: 'Times New Roman', serif;
 }
+
+
+a {
+    text-decoration: none;
+    color: darkgray;
+
+}
+
+a:hover{
+
+    color: green;
+  }

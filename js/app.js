@@ -99,7 +99,30 @@ Shop.prototype.renderBodyTable = function () {
 
 
 }
+function totalsRow() {
+    var tableRow = document.createElement("tr");
+    table.appendChild(tableRow);
 
+    var header = document.createElement("td");
+    header.textContent = "Totals";
+    tableRow.appendChild(header);
+
+    var sum = 0;
+    var totalForAllLocations = 0;
+
+    for (let i = 0; i < hours.length; i++) {
+        var td = document.createElement("td");
+        sum = shopOne.calc+ shopTwo.calc + shopThree.calc+ shopFour.calc+ shopFive.calc;
+        td.textContent = sum;
+        tableRow.appendChild(td);
+        totalForAllLocations = Math.floor( totalForAllLocations + sum);
+
+        console.log(sum);
+    }
+    var td = document.createElement("td");
+    td.textContent = totalForAllLocations;
+    tableRow.appendChild(td);
+}
 shopOne.getRandomCustomerPerHour();
 shopOne.getAvgcookiesPerHour();
 
@@ -125,3 +148,4 @@ shopFour.renderBodyTable();
 shopFive.getRandomCustomerPerHour();
 shopFive.getAvgcookiesPerHour();
 shopFive.renderBodyTable();
+totalsRow();

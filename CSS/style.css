@@ -43,3 +43,20 @@ a:hover{
 
     color: green;
   }
+
+  div table, th, td {
+    border: 1px solid black;
+    text-align: center;
+  }
+
+
+
+  footer{
+      margin-top: 50px;
+      padding-top: 30px;
+      text-align: center;
+    clear : both;
+    color: #fff;
+    height: 100px;
+    background: #444;
+}

@@ -8,6 +8,7 @@ parentElement.appendChild(table);
 //Here I will start to make function
 var hours = ["6 am", "7 am", "8 am", " 9 am", "10 am", "11 am", "12 am", "1 pm", "2 pm", "3 pm", "4 pm", "5 pm", "6 pm", "7 pm"];
 
+var locationArray =[];
 
 function Shop(min, max, avg, locationName) {
     this.total = 0;
@@ -15,6 +16,7 @@ function Shop(min, max, avg, locationName) {
     this.max = max;
     this.avg = avg;
     this.avgcookiesPerHour = [];
+    locationArray.push(this);
     this.locationName = locationName;
 }
 
@@ -29,7 +31,7 @@ Shop.prototype.getRandomCustomerPerHour = function () {
 
 Shop.prototype.getAvgcookiesPerHour = function () {
     for (let index = 0; index < hours.length; index++) {
-        var calc = this.getRandomCustomerPerHour() * this.avg;
+        var calc = Math.floor(this.getRandomCustomerPerHour() * this.avg);
         this.total = this.total + calc;
         this.avgcookiesPerHour.push(calc);
 
@@ -102,7 +104,8 @@ Shop.prototype.renderBodyTable = function () {
 function totalsRow() {
     var tableRow = document.createElement("tr");
     table.appendChild(tableRow);
-
+    /**Add attribuit */
+    tableRow.setAttribute('id','TotalRow');
     var header = document.createElement("td");
     header.textContent = "Totals";
     tableRow.appendChild(header);
@@ -110,7 +113,7 @@ function totalsRow() {
     var sum = 0;
     var totalForAllLocations = 0;
 
-    for (let i = 0; i < hours.length; i++) {
+   /* for (let i = 0; i < hours.length; i++) {
         var td = document.createElement("td");
         sum = shopOne.calc+ shopTwo.calc + shopThree.calc+ shopFour.calc+ shopFive.calc;
         td.textContent = sum;
@@ -118,11 +121,24 @@ function totalsRow() {
         totalForAllLocations = Math.floor( totalForAllLocations + sum);
 
         console.log(sum);
+    }*/
+
+    for (let i = 0; i < hours.length; i++) {
+        var td = document.createElement("td");
+        for (let index = 0; index < locationArray.length; index++) {
+            sum += locationArray[index].avgcookiesPerHour[i];
+        }
+        td.textContent = sum;
+        tableRow.appendChild(td);
+        totalForAllLocations = Math.floor( totalForAllLocations + sum);
     }
+     
     var td = document.createElement("td");
     td.textContent = totalForAllLocations;
     tableRow.appendChild(td);
 }
+
+console.log(locationArray);
 shopOne.getRandomCustomerPerHour();
 shopOne.getAvgcookiesPerHour();
 
@@ -149,3 +165,35 @@ shopFive.getRandomCustomerPerHour();
 shopFive.getAvgcookiesPerHour();
 shopFive.renderBodyTable();
 totalsRow();
+/*==============================*/
+
+
+//var shopOne = new Shop(23, 65, 6.3, "Seattle");
+//min, max, avg, locationName
+
+var locatForm = document.getElementById('LocationForm');
+
+locatForm.addEventListener('submit', function (event){
+    // alert("form submitted!");
+    event.preventDefault(); // preventing the default behavior of the form
+    // console.log(event.target.name.value);
+    var locatName = event.target.locationName.value;
+    var minval = event.target.Minimum.value;
+    var maxval = event.target.Maximum.value;
+    var averageval = event.target.average.value;
+
+    var newLocation = new Shop(minval, maxval, averageval, locatName);
+    
+    deleteRow();
+    console.log(newLocation);
+    newLocation.getRandomCustomerPerHour();
+    newLocation.getAvgcookiesPerHour();
+    newLocation.renderBodyTable();
+    totalsRow();
+});
+
+function deleteRow() {
+   
+    
+    document.getElementById("TotalRow").remove(); 
+  }
